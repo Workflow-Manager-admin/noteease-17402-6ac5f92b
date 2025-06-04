@@ -95,3 +95,21 @@ main.server.mjs     | main.server | 800 bytes |
 Application bundle generation complete. [0.303 seconds]
 
 Page reload sent to client(s).
+❯ Changes detected. Rebuilding...
+✔ Changes detected. Rebuilding...
+Application bundle generation failed. [0.328 seconds]
+
+✘ [ERROR] TS2420: Class 'NotesContainerComponent' incorrectly implements interface 'OnInit'.
+  Property 'ngOnInit' is missing in type 'NotesContainerComponent' but required in type 'OnInit'. [plugin angular-compiler]
+
+    src/app/components/notes-container/notes-container.component.ts:14:13:
+      14 │ export class NotesContainerComponent implements OnInit {
+         ╵              ~~~~~~~~~~~~~~~~~~~~~~~
+
+  'ngOnInit' is declared here.
+
+    node_modules/@angular/core/index.d.ts:8345:4:
+      8345 │     ngOnInit(): void;
+           ╵     ~~~~~~~~~~~~~~~~~
+
+
