@@ -17,7 +17,7 @@ export class NotesContainerComponent implements OnInit {
   searchQuery: string = '';
   categories: string[] = ['Personal', 'Work', 'Ideas', 'Tasks'];
 
-  constructor(private notesService: NotesService) {}
+  constructor(private readonly notesService: NotesService) {}
 
   ngOnInit() {
     this.notesService.getNotes().subscribe(notes => {
