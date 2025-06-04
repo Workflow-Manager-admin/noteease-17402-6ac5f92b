@@ -1,0 +1,64 @@
+<div class="top-bar">
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search notes..." 
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
+    >
+  </div>
+  <button class="create-button" (click)="onCreateNote()">
+    Create Note
+  </button>
+</div>
+
+<div class="main-content">
+  <div class="sidebar">
+    <ul class="note-list">
+      @for (note of notes; track note.id) {
+        <li 
+          class="note-item" 
+          [class.selected]="selectedNote?.id === note.id"
+          (click)="onSelectNote(note)"
+        >
+          <div class="note-title">{{ note.title }}</div>
+          <div class="note-preview">{{ note.content }}</div>
+          @if (note.category) {
+            <div class="category-tag">{{ note.category }}</div>
+          }
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="note-content">
+    @if (selectedNote) {
+      <div class="note-editor">
+        <input 
+          type="text" 
+          [(ngModel)]="selectedNote.title" 
+          placeholder="Note title"
+        >
+        <select [(ngModel)]="selectedNote.category">
+          <option value="">No Category</option>
+          @for (category of categories; track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+        <textarea 
+          [(ngModel)]="selectedNote.content"
+          placeholder="Write your note here..."
+        ></textarea>
+        <div class="note-actions">
+          <button class="save-button" (click)="onUpdateNote()">Save</button>
+          <button class="delete-button" (click)="onDeleteNote(selectedNote.id)">Delete</button>
+        </div>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <p>Select a note to view or edit</p>
+      </div>
+    }
+  </div>
+</div>

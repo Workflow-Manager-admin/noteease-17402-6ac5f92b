@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NotesContainerComponent } from './components/notes-container/notes-container.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [RouterOutlet, NotesContainerComponent],
+  template: '<app-notes-container></app-notes-container>'
 })
 export class AppComponent {
-  title = 'angular';
+  title = 'NoteEase';
 }
