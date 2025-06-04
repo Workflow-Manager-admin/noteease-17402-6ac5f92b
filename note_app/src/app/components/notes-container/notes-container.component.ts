@@ -17,20 +17,17 @@ export class NotesContainerComponent implements OnInit {
   public searchQuery: string = '';
   public categories: string[] = ['Personal', 'Work', 'Ideas', 'Tasks'];
 
-  constructor(private readonly notesService: NotesService) {}
-
-  ngOnInit(): void {
-    this.subscribeToNotes();
-    this.subscribeToSelectedNote();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  constructor(private readonly notesService: NotesService) {
+    // Constructor injection for NotesService
   }
 
-  public subscribeToNotes(): void {
+  public ngOnInit(): void {
+    // Initialize note subscriptions
     this.notesService.getNotes().subscribe(notes => {
       this.notes = notes;
     });
-  }
 
-  public subscribeToSelectedNote(): void {
     this.notesService.getSelectedNote().subscribe(note => {
       this.selectedNote = note;
     });
