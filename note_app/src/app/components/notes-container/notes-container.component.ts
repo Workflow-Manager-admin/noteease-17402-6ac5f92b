@@ -12,42 +12,49 @@ import { Note } from '../../models/note.model';
   styleUrls: ['./notes-container.component.css']
 })
 export class NotesContainerComponent implements OnInit {
-  notes: Note[] = [];
-  selectedNote: Note | null = null;
-  searchQuery: string = '';
-  categories: string[] = ['Personal', 'Work', 'Ideas', 'Tasks'];
+  public notes: Note[] = [];
+  public selectedNote: Note | null = null;
+  public searchQuery: string = '';
+  public categories: string[] = ['Personal', 'Work', 'Ideas', 'Tasks'];
 
   constructor(private readonly notesService: NotesService) {}
 
   ngOnInit(): void {
+    this.subscribeToNotes();
+    this.subscribeToSelectedNote();
+  }
+
+  public subscribeToNotes(): void {
     this.notesService.getNotes().subscribe(notes => {
       this.notes = notes;
     });
+  }
 
+  public subscribeToSelectedNote(): void {
     this.notesService.getSelectedNote().subscribe(note => {
       this.selectedNote = note;
     });
   }
 
-  onCreateNote() {
+  public onCreateNote(): void {
     this.notesService.createNote('New Note', '', 'Personal');
   }
 
-  onSelectNote(note: Note) {
+  public onSelectNote(note: Note): void {
     this.notesService.selectNote(note);
   }
 
-  onUpdateNote() {
+  public onUpdateNote(): void {
     if (this.selectedNote) {
       this.notesService.updateNote(this.selectedNote);
     }
   }
 
-  onDeleteNote(id: string) {
+  public onDeleteNote(id: string): void {
     this.notesService.deleteNote(id);
   }
 
-  onSearch() {
+  public onSearch(): void {
     this.notesService.searchNotes(this.searchQuery);
   }
 }
